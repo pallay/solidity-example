@@ -7,6 +7,9 @@ contract AmazonFactory {
      * @dev prints Hello World String
      */
     
+    uint barcodeLength = 16;
+    uint barcodeModulus = 10 ** barcodeLength;
+
     struct Box {
         string size;
         uint code;
@@ -18,8 +21,9 @@ contract AmazonFactory {
         boxes.push(Box(_size, _code));
     }
  
-    function print() public pure returns (string memory) {
-        return "Hello World";
+    function _generateRandomCode(string memory _str) public view returns (uint) {
+        uint rand = uint(keccak256(abi.encodePacked(_str)));
+        return rand % barcodeModulus;
     }
     
 }
