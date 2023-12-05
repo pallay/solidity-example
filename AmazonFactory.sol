@@ -13,6 +13,10 @@ contract AmazonFactory {
     }
 
     Box[] public boxes;
+
+    function _createBox(string memory _size, uint _code) private {
+        boxes.push(Box(_size, _code));
+    }
  
     function print() public pure returns (string memory) {
         return "Hello World";
