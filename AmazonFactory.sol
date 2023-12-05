@@ -21,9 +21,14 @@ contract AmazonFactory {
         boxes.push(Box(_size, _code));
     }
  
-    function _generateRandomCode(string memory _str) public view returns (uint) {
+    function _generateRandomBarcode(string memory _str) public view returns (uint) {
         uint rand = uint(keccak256(abi.encodePacked(_str)));
         return rand % barcodeModulus;
+    }
+
+    function createSizedBox(string memory _size) public {
+        uint randomBarcode = _generateRandomBarcode(_size);
+        _createBox(_size, randomBarcode);
     }
     
 }
